@@ -1,0 +1,214 @@
+/* Adicione isso ao seu arquivo de estilo CSS */
+
+/* Estilos para o formulário */
+.beautiful-form {
+  /* max-width: 400px; */
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+button {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin-top: 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button.primary {
+  background-color: #007bff;
+  color: #fff;
+}
+
+button.primary:hover {
+  background-color: #0056b3;
+}
+
+button.accent {
+  background-color: #ffc107;
+  color: #000;
+}
+
+button.accent:hover {
+  background-color: #ffca28;
+}
+
+.form-field {
+  width: 100%;
+  margin-bottom: 30px; /* Aumentei um pouco o espaço entre os campos */
+}
+
+.mat-input-element {
+  font-size: 16px; /* Aumentei o tamanho da fonte nos campos de entrada */
+  padding: 15px 12px; /* Aumentei o preenchimento interno dos campos de entrada */
+  width: 100%;
+}
+
+.mat-form-field-label {
+  font-size: 16px;
+  padding: 0px !important;
+}
+
+/* Layout da página */
+.container {
+  display: flex;
+  /* justify-content: space-between;
+  align-items: center; */
+  /* max-width: 1000px; */
+  margin: 0 auto;
+}
+
+.image-container {
+  flex: 1;
+  margin-right: 20px; /* Espaçamento entre a imagem e o formulário */
+}
+
+.image-container img {
+  /* max-width:  50vh; */
+  width: 753px;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-container {
+  flex: 2;
+  max-width: 50%;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.title {
+  /* text-align: center; */
+  margin-bottom: 95px;
+  margin-top: 100px;
+}
+
+.title h2 {
+  font-size: 4em;
+    max-width: 668px;
+    line-height: 60px;
+}
+
+
+.left{
+    padding-right: 71px;
+    padding-left: 65px;
+    max-width: 50%;
+    width: 100vh;
+}
+
+input{
+  width: 100%;
+}
+
+.input-nome {
+  width: 100%;
+  position: relative;
+  font-size: 16px;
+  color: #5b5b5b;
+  border: none; /* Removendo a borda padrão */
+  border-bottom: 1px solid green; /* Adicionando uma linha na parte inferior */
+  padding: 10px 10px 5px 15px; /* Ajustando o preenchimento */
+  box-sizing: border-box; /* Garantindo que o preenchimento seja incluído na largura */
+  z-index: 2;
+  background-color: transparent; /* Tornando o fundo transparente */
+}
+
+.label-nome {
+  position: absolute;
+  color: Goldenrod;
+  font-weight: bold;
+  top: 20px; /* Posicionando o rótulo inicialmente */
+  left: 15px; /* Ajustando o posicionamento horizontal */
+  transition: top 0.5s, font-size 0.5s; /* Adicionando transições suaves */
+  pointer-events: none; /* Evitando que o rótulo seja clicável */
+}
+
+.input-nome:focus + .label-nome, .input-nome:not(:placeholder-shown) + .label-nome {
+  top: 0; /* Movendo o rótulo para cima quando o campo está focado ou tem valor */
+  font-size: 12px; /* Reduzindo o tamanho da fonte quando o rótulo está em cima do campo */
+}
+
+/* Estilos para o checkbox */
+.checkbox-container {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.checkbox-label {
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Esconde o input nativo */
+.checkbox-label input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* Estilo do checkbox personalizado */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 25px;
+  width: 25px;
+  background-color: #eee;
+  border-radius: 5px;
+}
+
+/* Estilo do checkbox quando marcado */
+.checkbox-label input:checked ~ .checkmark {
+  background-color: #2196F3;
+}
+
+/* Cria a marca de seleção (o "X") */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Mostra a marca de seleção quando o checkbox está marcado */
+.checkbox-label input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Estilo da marca de seleção (o "X") */
+.checkbox-label .checkmark:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+/* Estilo do texto ao lado do checkbox */
+.checkbox-text {
+  margin-left: 30px;
+}

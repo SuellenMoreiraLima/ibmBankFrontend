@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            background-image: url('../../assets/portrait-african-businesswoman-leading-this-business-meeting.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            padding: 10px 20px;
+            height: 35px;
+        }
+
+        .blue {
+            background-color: #2c5085;
+        }
+
+        .white {
+            background-color: #ffffff;
+        }
+
+        .content {
+            padding: 60vh;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .logo {
+            width: 94px;
+            height: auto;
+            max-width: 100%;
+        }
+
+        button {
+            background-color: #2c5085 !important;
+            border-radius: 15px;
+            margin-left: auto;
+        }
+
+        .buttons button {
+            margin-left: 10px;
+        }
+
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #2c5085;
+            padding: 10px 20px;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 78px;
+            left: 136px;
+            color: #ffffff;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .bottom-text {
+          position: absolute;
+          top: calc(122px);
+          left: 136px;
+          color: #ffffff;
+          font-size: 20px;
+          font-family: Arial, sans-serif;
+          line-height: 34px;
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+    <!-- Barra de Ferramentas -->
+    <div class="toolbar white">
+        <div class="img logo">
+            <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
+        </div>
+        <div class="buttons">
+            <button (click)="redirectToCreateAccount()" mat-flat-button color="primary">Cadastre um nova conta</button>
+        </div>
+    </div>
+
+    <div class="toolbar blue"></div>
+  </div>
+    <!-- Conteúdo da Página -->
+    <div class="content">
+
+      <!-- (click)="redirectToCreateAccount() -->
+        <!-- Aqui você pode adicionar os componentes da sua aplicação Angular -->
+        <h1 class="text-overlay">Bem-vindo ao Banco IBM</h1>
+        <p class="bottom-text">Descubra uma nova forma de gerenciar suas finanças!<br>
+           Venha fazer parte da nossa família no Banco IBM e tenha<br> acesso a soluções
+           financeiras personalizadas<br>
+            para alcançar seus objetivos</p>
+    </div>
+</body>
+</html>

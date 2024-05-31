@@ -1,0 +1,45 @@
+<div class="container">
+  <div class="left">
+    <div class="title">
+      <h2>Complete os campos ao lado para pedir sua Conta e Cartão de crédito</h2>
+    </div>
+    <div class="image-container">
+      <img src="../../../assets/img-phone-card.png" alt="Exemplo de Imagem">
+    </div>
+  </div>
+  <div class="form-container">
+    <h2>Cadastrar Cliente</h2>
+    <form class="beautiful-form" (ngSubmit)="onSubmit()" #form="ngForm">
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label class="label-nome">Nome</mat-label>
+        <input matInput placeholder="Nome" type="text" name="name" id="name" [(ngModel)]="account.name" required class="input-nome">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label class="label-nome">Idade</mat-label>
+        <input matInput placeholder="Idade" type="number" name="age" id="age" [(ngModel)]="account.age" required class="input-nome">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label class="label-nome">Número da Conta</mat-label>
+        <input matInput placeholder="Número da Conta" type="text" name="numberAccount" id="numberAccount" [(ngModel)]="account.numberAccount" required class="input-nome">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label class="label-nome">Email</mat-label>
+        <input matInput placeholder="Email" type="email" name="email" id="email" [(ngModel)]="account.email" required class="input-nome">
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="form-field">
+        <mat-label class="label-nome">Senha</mat-label>
+        <input matInput placeholder="Senha" type="password" name="password" id="password" [(ngModel)]="account.password" required class="input-nome">
+      </mat-form-field>
+      <div class="checkbox-container">
+        <label class="checkbox-label">
+          <input type="checkbox" class="checkbox-input">
+          <span class="checkmark"></span>
+          <span class="checkbox-text">Li e concordo com os termos de criação da conta</span>
+        </label>
+      </div>
+
+      <button mat-raised-button class="primary" type="submit" [disabled]="form.form.invalid">Criar minha conta</button>
+      <button mat-raised-button class="accent" [routerLink]="['../login']">Fazer Login</button>
+    </form>
+  </div>
+</div>
