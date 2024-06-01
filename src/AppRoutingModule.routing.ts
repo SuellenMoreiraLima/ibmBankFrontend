@@ -2,14 +2,17 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './app/home/home.component';
 import { AuthenticatedHomeComponent } from './app/authenticated-home/authenticated-home.component';
-import { LoginComponent } from './app/account/login/login.component';
 import { CreateAccountComponent } from './app/account/create-account/create-account.component';
 import { AuthGuard } from './app/account/shared/auth.guard';
 import { ClientComponent } from './app/client/client.component';
+import { ListClientComponent } from './app/list-client/list-client.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create-account', component: CreateAccountComponent },
+  { path: 'listClient', component: ListClientComponent },
+
+  /* { path: 'login', component: LoginComponent }, */
   { path: 'client', component: ClientComponent }
 
   /* { path: '',

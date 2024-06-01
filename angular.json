@@ -69,7 +69,8 @@
               "browserTarget": "ibmBankFrontend:build:production"
             },
             "development": {
-              "browserTarget": "ibmBankFrontend:build:development"
+              "browserTarget": "ibmBankFrontend:build:development",
+              "proxyConfig": "./src/proxy.conf.js"
             }
           },
           "defaultConfiguration": "development"

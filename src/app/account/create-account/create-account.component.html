@@ -1,4 +1,111 @@
-<div class="container">
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            padding: 10px 20px;
+            height: 35px;
+        }
+
+        .blue {
+            background-color: #2c5085;
+        }
+
+        .white {
+            background-color: #ffffff;
+        }
+
+        /* .content {
+            padding: 60vh;
+            position: relative;
+            background-color: rgba(0, 0, 0, 0.5);
+        } */
+
+        .logo {
+            width: 94px;
+            height: auto;
+            max-width: 100%;
+        }
+
+        button {
+            background-color: #2c5085 !important;
+            border-radius: 15px;
+            margin-left: auto;
+        }
+
+        .buttons button {
+            margin-left: 10px;
+        }
+
+        .footer {
+            /* position: fixed; */
+            bottom: 0;
+            width: 100%;
+            background-color: #2c5085;
+            padding: 10px 20px;
+        }
+
+        .text-overlay {
+            position: absolute;
+            top: 78px;
+            left: 136px;
+            color: #ffffff;
+            font-family: 'Arial Black', Arial, sans-serif;
+            font-weight: bold;
+            font-size: 24px;
+            z-index: 1;
+        }
+
+        .bottom-text {
+          position: absolute;
+          top: calc(122px);
+          left: 136px;
+          color: #ffffff;
+          font-size: 20px;
+          font-family: Arial, sans-serif;
+        }
+
+        p {
+            color: #ffffff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+  <div class="header">
+    <!-- Barra de Ferramentas -->
+    <div class="toolbar white">
+        <div class="img logo">
+            <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
+        </div>
+        <div class="buttons">
+            <button mat-flat-button color="primary">Cadastre um nova conta</button>
+        </div>
+    </div>
+
+    <div class="toolbar blue"></div>
+  </div>
+    <!-- Conteúdo da Página -->
+    <div class="container">
   <div class="left">
     <div class="title">
       <h2>Complete os campos ao lado para pedir sua Conta e Cartão de crédito</h2>
@@ -9,37 +116,63 @@
   </div>
   <div class="form-container">
     <h2>Cadastrar Cliente</h2>
-    <form class="beautiful-form" (ngSubmit)="onSubmit()" #form="ngForm">
+    <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Nome</mat-label>
-        <input matInput placeholder="Nome" type="text" name="name" id="name" [(ngModel)]="account.name" required class="input-nome">
+        <input matInput placeholder="Nome" formControlName="name" class="input-nome">
+        <mat-error *ngIf="formControls['name'].invalid && formControls['name'].touched">Nome é obrigatório.</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Idade</mat-label>
-        <input matInput placeholder="Idade" type="number" name="age" id="age" [(ngModel)]="account.age" required class="input-nome">
+        <input matInput placeholder="Idade" type="number" formControlName="age" class="input-nome">
+        <mat-error *ngIf="formControls['age'].invalid && formControls['age'].touched">
+          <ng-container *ngIf="formControls['age'].errors?.['required']">Idade é obrigatória.</ng-container>
+          <ng-container *ngIf="formControls['age'].errors?.['min']">A idade deve ser maior que zero.</ng-container>
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Número da Conta</mat-label>
-        <input matInput placeholder="Número da Conta" type="text" name="numberAccount" id="numberAccount" [(ngModel)]="account.numberAccount" required class="input-nome">
+        <input matInput placeholder="Número da Conta" formControlName="numberAccount" class="input-nome">
+        <mat-error *ngIf="formControls['numberAccount'].invalid && formControls['numberAccount'].touched">Número da Conta é obrigatório.</mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Email</mat-label>
-        <input matInput placeholder="Email" type="email" name="email" id="email" [(ngModel)]="account.email" required class="input-nome">
+        <input matInput placeholder="Email" formControlName="email" class="input-nome">
+        <mat-error *ngIf="formControls['email'].invalid && formControls['email'].touched">
+          <ng-container *ngIf="formControls['email'].errors?.['required']">Email é obrigatório.</ng-container>
+          <ng-container *ngIf="formControls['email'].errors?.['email']">Formato de email inválido.</ng-container>
+        </mat-error>
       </mat-form-field>
+
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Senha</mat-label>
-        <input matInput placeholder="Senha" type="password" name="password" id="password" [(ngModel)]="account.password" required class="input-nome">
+        <input matInput placeholder="Senha" type="password" formControlName="password" class="input-nome">
+        <mat-error *ngIf="formControls['password'].invalid && formControls['password'].touched">
+          <ng-container *ngIf="formControls['password'].errors?.['required']">Senha é obrigatória.</ng-container>
+          <ng-container *ngIf="formControls['password'].errors?.['minlength']">A senha deve ter no mínimo 6 caracteres.</ng-container>
+        </mat-error>
       </mat-form-field>
+
       <div class="checkbox-container">
         <label class="checkbox-label">
-          <input type="checkbox" class="checkbox-input">
+          <input type="checkbox" class="checkbox-input" formControlName="terms">
           <span class="checkmark"></span>
           <span class="checkbox-text">Li e concordo com os termos de criação da conta</span>
         </label>
+        <mat-error *ngIf="formControls['terms'].invalid && formControls['terms'].touched">Você deve aceitar os termos.</mat-error>
       </div>
 
-      <button mat-raised-button class="primary" type="submit" [disabled]="form.form.invalid">Criar minha conta</button>
+      <button mat-raised-button class="primary" type="submit" [disabled]="accountForm.invalid">Criar minha conta</button>
       <button mat-raised-button class="accent" [routerLink]="['../login']">Fazer Login</button>
     </form>
+
+
+
   </div>
 </div>
+<div class="footer"></div> <!-- Rodapé fixo na parte inferior -->
+</body>
+</html>

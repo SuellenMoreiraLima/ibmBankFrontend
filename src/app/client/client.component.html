@@ -85,7 +85,7 @@
         }
 
         p {
-            color: #ffffff;
+            color: #000000;
             font-size: 16px;
         }
     </style>
@@ -104,35 +104,80 @@
 
     <div class="toolbar blue"></div>
   </div>
-    <!-- Conteúdo da Página -->
+<!-- Conteúdo da Página -->
 <div class="content">
+  <!-- Menu Lateral -->
   <div class="sidebar">
-      <ul>
-          <li [ngClass]="{ 'active': selectedOption === 'dados' }"><a href="javascript:void(0);" (click)="changeContent('dados')">Dados Cliente</a></li>
-          <li [ngClass]="{ 'active': selectedOption === 'debito' }"><a href="javascript:void(0);" (click)="changeContent('debito')">Débito Cliente</a></li>
-          <li [ngClass]="{ 'active': selectedOption === 'credito' }"><a href="javascript:void(0);" (click)="changeContent('credito')">Crédito Cliente</a></li>
-          <li [ngClass]="{ 'active': selectedOption === 'extrato' }"><a href="javascript:void(0);" (click)="changeContent('extrato')">Extrato da Conta</a></li>
-      </ul>
+    <ul>
+      <li [ngClass]="{ 'active': selectedOption === 'dados' }"><a href="javascript:void(0);" (click)="changeContent('dados')">Dados Cliente</a></li>
+      <li [ngClass]="{ 'active': selectedOption === 'debito' }"><a href="javascript:void(0);" (click)="changeContent('debito')">Débito Cliente</a></li>
+      <li [ngClass]="{ 'active': selectedOption === 'credito' }"><a href="javascript:void(0);" (click)="changeContent('credito')">Crédito Cliente</a></li>
+      <li [ngClass]="{ 'active': selectedOption === 'extrato' }"><a href="javascript:void(0);" (click)="changeContent('extrato')">Extrato da Conta</a></li>
+    </ul>
   </div>
 
+  <!-- Conteúdo Direito -->
   <div class="content-right">
-      <div *ngIf="selectedOption === 'dados'">
-          <h2>Dados Cliente</h2>
-          <p>Conteúdo dos dados do cliente...</p>
-      </div>
-      <div *ngIf="selectedOption === 'debito'">
-          <h2>Débito Cliente</h2>
-          <p>Conteúdo do débito do cliente...</p>
-      </div>
-      <div *ngIf="selectedOption === 'credito'">
-          <h2>Crédito Cliente</h2>
-          <p>Conteúdo do crédito do cliente...</p>
-      </div>
+    <!-- Seleção do Cliente -->
+    <select [(ngModel)]="selectedAccountId" (change)="fetchClientById(selectedAccountId)">
+      <h3>Selecione um cliente</h3>
+      <option value="" disabled selected>Selecione um cliente</option>
+      <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+    </select>
+
+    <!-- Conteúdo Dinâmico -->
+    <div *ngIf="selectedOption === 'dados'">
+      <h2>Dados do Cliente</h2>
+      <p>Nome: {{ account.name }}</p>
+      <p>Idade: {{ account.age }}</p>
+      <p>Número da Conta: {{ account.numberAccount }}</p>
+      <p>Email: {{ account.email }}</p>
+    </div>
+    <div *ngIf="selectedOption === 'debito'">
+      <h2>Débito Cliente</h2>
+      <form (submit)="submitDebit()">
+        <label for="valorDeposito">Valor do Depósito:</label>
+        <mat-form-field appearance="fill">
+          <mat-label>Valor do Débito</mat-label>
+          <input matInput [(ngModel)]="valorDebito" type="number" id="valorDebito" name="valorDebito">
+        </mat-form-field>
+        <button mat-flat-button color="primary" type="submit">Debitar</button>
+      </form>
+    </div>
+    <div *ngIf="selectedOption === 'credito'">
+      <h2>Crédito Cliente</h2>
+      <form (submit)="submitDeposit()">
+        <label for="valorDeposito">Valor do Depósito:</label>
+        <input type="number" id="valorDeposito" name="valorDeposito" [(ngModel)]="valorDeposito">
+        <button mat-flat-button color="primary" type="submit">Depositar</button>
+      </form>
+    </div>
       <div *ngIf="selectedOption === 'extrato'">
-          <h2>Extrato da Conta</h2>
-          <p>Conteúdo do extrato da conta...</p>
+        <div class="balance-container">
+          <h2>Saldo Atual: {{ saldoAtual  | currency }}</h2>
+        </div>
+        <table class="transaction-table">
+          <thead>
+            <tr>
+              <th>Data</th>
+              <th>Descrição</th>
+              <th>Valor</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let transaction of transactionHistory">
+              <td>{{ transaction.date | date: 'short' }}</td>
+              <td>{{ transaction.description }}</td>
+              <td [ngClass]="{'positive': transaction.value > 0, 'negative': transaction.value < 0}">
+                {{ transaction.value | currency }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-  </div>
+
+    </div>
+
 </div>
 <div class="footer"></div> <!-- Rodapé fixo na parte inferior -->
 </body>
