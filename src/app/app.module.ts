@@ -16,8 +16,8 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatGridListModule} from '@angular/material/grid-list';
 import { ClientComponent } from './client/client.component';
-import { ListClientComponent } from './list-client/list-client.component';
 import {MatListModule} from '@angular/material/list';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,7 +26,6 @@ import {MatListModule} from '@angular/material/list';
     AuthenticatedHomeComponent,
     CreateAccountComponent,
     ClientComponent,
-    ListClientComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +40,8 @@ import {MatListModule} from '@angular/material/list';
     MatFormFieldModule,
     MatGridListModule,
     MatListModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

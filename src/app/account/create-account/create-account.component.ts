@@ -18,8 +18,8 @@ export class CreateAccountComponent implements OnInit {
   ) {
     this.accountForm = this.fb.group({
       name: ['', Validators.required, Validators.nullValidator],
-      age: ['', [Validators.required, Validators.min(1)]],
-      numberAccount: ['', Validators.required],
+      age: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
+      numberAccount: ['', Validators.required, Validators.min(5), Validators.max(6)],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       terms: [false, Validators.requiredTrue]
@@ -32,9 +32,9 @@ export class CreateAccountComponent implements OnInit {
     return this.accountForm.controls;
   }
 
+
   onSubmit() {
     if (this.accountForm.invalid) {
-      // Trigger validation messages
       Object.keys(this.formControls).forEach(field => {
         const control = this.accountForm.get(field);
         control?.markAsTouched({ onlySelf: true });

@@ -17,4 +17,8 @@ export class HomeComponent {
     this.router.navigate(['/create-account']);
   }
 
+  redirectToClients(){
+    this.router.navigate(['/client']);
+  }
+
 }

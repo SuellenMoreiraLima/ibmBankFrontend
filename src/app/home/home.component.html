@@ -49,11 +49,18 @@
         button {
             background-color: #2c5085 !important;
             border-radius: 15px;
-            margin-left: auto;
+            margin-left: 10px;
         }
+
+        .buttons {
+            display: flex;
+            justify-content: flex-end;
+          }
 
         .buttons button {
             margin-left: 10px;
+            margin-right: 10px;
+            display: flex;
         }
 
         .footer {
@@ -93,23 +100,25 @@
 </head>
 <body>
   <div class="header">
-    <!-- Barra de Ferramentas -->
+
     <div class="toolbar white">
         <div class="img logo">
             <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
         </div>
         <div class="buttons">
+        <div class="button">
+          <button (click)="redirectToClients()" mat-flat-button color="primary">Acesse os clientes</button>
+      </div>
+        <div class="button">
             <button (click)="redirectToCreateAccount()" mat-flat-button color="primary">Cadastre um nova conta</button>
         </div>
+      </div>
     </div>
 
     <div class="toolbar blue"></div>
   </div>
-    <!-- Conteúdo da Página -->
     <div class="content">
 
-      <!-- (click)="redirectToCreateAccount() -->
-        <!-- Aqui você pode adicionar os componentes da sua aplicação Angular -->
         <h1 class="text-overlay">Bem-vindo ao Banco IBM</h1>
         <p class="bottom-text">Descubra uma nova forma de gerenciar suas finanças!<br>
            Venha fazer parte da nossa família no Banco IBM e tenha<br> acesso a soluções

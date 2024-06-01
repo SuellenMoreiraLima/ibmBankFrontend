@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AccountService } from '../account/shared/account.service';
 import { catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-client',
@@ -9,11 +10,11 @@ import { throwError } from 'rxjs';
   styleUrls: ['./client.component.scss']
 })
 export class ClientComponent {
-  selectedOption: string = 'dados';
+  selectedOption: string = 'initial';
   account: any = {};
   clients: any[] = [];
 
-  constructor(private accountService: AccountService) {}
+  constructor(private accountService: AccountService, private router: Router) {}
   valorDeposito: number = 0;
   valorDebito: number = 0;
   selectedAccountId: number = 0;
@@ -78,22 +79,8 @@ export class ClientComponent {
     }
   }
 
- /*  submitDebit(): void {
-    if (this.valorDebito > 0 && this.selectedAccountId > 0) {
-      this.accountService.debitToAccount(this.selectedAccountId, this.valorDebito)
-        .subscribe(() => {
-          console.log('Débito realizado com sucesso!');
-          this.fetchClientById(this.selectedAccountId);
-        }, error => {
-          console.error('Erro ao processar débito:', error);
-        });
-    } else {
-      console.error('Valor do débito ou ID da conta inválido.');
-    }
-  } */
   submitDebit(): void {
     if (this.valorDebito > 0 && this.selectedAccountId > 0) {
-      console.log('Valor de débito enviado:', this.valorDebito);  // Adicione este log
       this.accountService.debitToAccount(this.selectedAccountId, this.valorDebito).subscribe(
         () => {
           console.log('Débito realizado com sucesso!');
@@ -118,5 +105,8 @@ export class ClientComponent {
           console.error('Erro ao recuperar histórico de transações:', error);
         }
       );
+  }
+  redirectToCreateAccount() {
+    this.router.navigate(['/create-account']);
   }
 }

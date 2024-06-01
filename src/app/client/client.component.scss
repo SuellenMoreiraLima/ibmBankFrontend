@@ -1,8 +1,4 @@
-/* Adicione isso ao seu arquivo de estilo CSS */
-
-// /* Estilos para o formulário */
  .beautiful-form {
-   /* max-width: 400px; */
    margin: 0 auto;
    padding: 20px;
    background-color: #fff;
@@ -35,12 +31,12 @@
 
  .form-field {
    width: 100%;
-   margin-bottom: 30px; /* Aumentei um pouco o espaço entre os campos */
+   margin-bottom: 30px;
  }
 
  .mat-input-element {
-   font-size: 16px; /* Aumentei o tamanho da fonte nos campos de entrada */
-   padding: 15px 12px; /* Aumentei o preenchimento interno dos campos de entrada */
+   font-size: 16px;
+   padding: 15px 12px;
    width: 100%;
  }
 
@@ -52,19 +48,15 @@
  /* Layout da página */
  .container {
    display: flex;
-   /* justify-content: space-between;
-   align-items: center; */
-   /* max-width: 1000px; */
    margin: 0 auto;
  }
 
  .image-container {
    flex: 1;
-   margin-right: 20px; /* Espaçamento entre a imagem e o formulário */
+   margin-right: 20px;
  }
 
  .image-container img {
-   /* max-width:  50vh; */
    width: 753px;
    height: auto;
    justify-content: center;
@@ -81,7 +73,6 @@
  }
 
  .title {
-   /* text-align: center; */
    margin-bottom: 95px;
    margin-top: 100px;
  }
@@ -122,7 +113,6 @@
  .content-right {
    flex: 1;
    padding: 20px;
-   background-color: #f0f0f0;
  }
  .balance-container {
   text-align: center;
@@ -162,9 +152,9 @@
 }
 
 .transaction-table tbody tr.positive {
-  color: #28a745; /* Green for positive values */
+  color: #28a745;
 }
 
 .transaction-table tbody tr.negative {
-  color: #dc3545; /* Red for negative values */
+  color: #dc3545;
 }

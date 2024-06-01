@@ -34,12 +34,6 @@
             background-color: #ffffff;
         }
 
-        /* .content {
-            padding: 60vh;
-            position: relative;
-            background-color: rgba(0, 0, 0, 0.5);
-        } */
-
         .logo {
             width: 94px;
             height: auto;
@@ -57,7 +51,6 @@
         }
 
         .footer {
-            /* position: fixed; */
             bottom: 0;
             width: 100%;
             background-color: #2c5085;
@@ -88,11 +81,12 @@
             color: #ffffff;
             font-size: 16px;
         }
+
     </style>
 </head>
 <body>
   <div class="header">
-    <!-- Barra de Ferramentas -->
+
     <div class="toolbar white">
         <div class="img logo">
             <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
@@ -104,7 +98,7 @@
 
     <div class="toolbar blue"></div>
   </div>
-    <!-- Conteúdo da Página -->
+
     <div class="container">
   <div class="left">
     <div class="title">
@@ -115,13 +109,13 @@
     </div>
   </div>
   <div class="form-container">
-    <h2>Cadastrar Cliente</h2>
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Nome</mat-label>
-        <input matInput placeholder="Nome" formControlName="name" class="input-nome">
+        <input matInput placeholder="Nome" formControlName="name" class="input-nome" required>
         <mat-error *ngIf="formControls['name'].invalid && formControls['name'].touched">Nome é obrigatório.</mat-error>
       </mat-form-field>
+
 
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Idade</mat-label>
@@ -129,13 +123,16 @@
         <mat-error *ngIf="formControls['age'].invalid && formControls['age'].touched">
           <ng-container *ngIf="formControls['age'].errors?.['required']">Idade é obrigatória.</ng-container>
           <ng-container *ngIf="formControls['age'].errors?.['min']">A idade deve ser maior que zero.</ng-container>
+          <ng-container *ngIf="formControls['age'].errors?.['max']">A idade deve ter no máximo dois dígitos.</ng-container>
         </mat-error>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="form-field">
         <mat-label class="label-nome">Número da Conta</mat-label>
-        <input matInput placeholder="Número da Conta" formControlName="numberAccount" class="input-nome">
+        <input matInput placeholder="Número da Conta" type="number" formControlName="numberAccount" class="input-nome">
         <mat-error *ngIf="formControls['numberAccount'].invalid && formControls['numberAccount'].touched">Número da Conta é obrigatório.</mat-error>
+        <ng-container *ngIf="formControls['numberAccount'].errors?.['min']">O numero da conta deve ter 6 dígitos.</ng-container>
+        <ng-container *ngIf="formControls['numberAccount'].errors?.['max']">O numero da conta deve ter 6 dígitos.</ng-container>
       </mat-form-field>
 
       <mat-form-field appearance="fill" class="form-field">
@@ -164,15 +161,11 @@
         </label>
         <mat-error *ngIf="formControls['terms'].invalid && formControls['terms'].touched">Você deve aceitar os termos.</mat-error>
       </div>
-
-      <button mat-raised-button class="primary" type="submit" [disabled]="accountForm.invalid">Criar minha conta</button>
-      <button mat-raised-button class="accent" [routerLink]="['../login']">Fazer Login</button>
+      <button mat-raised-button class="primary" type="submit" (click)="onSubmit">Criar minha conta</button>
     </form>
-
-
 
   </div>
 </div>
-<div class="footer"></div> <!-- Rodapé fixo na parte inferior -->
+<div class="footer"></div>
 </body>
 </html>
