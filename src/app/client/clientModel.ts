@@ -3,7 +3,6 @@ export interface Client {
   name: string;
   age: number;
   email: string;
-  password: string;
   numberAccount: number
 
 }

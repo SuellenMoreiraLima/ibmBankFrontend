@@ -20,6 +20,8 @@ export class ClientComponent {
   selectedAccountId: number = 0;
   transactionHistory: any[] = [];
   saldoAtual: number = 0;
+  message: string = '';
+  success: boolean = true;
 
   ngOnInit(): void {
     this.accountService.getClients()
@@ -54,6 +56,7 @@ export class ClientComponent {
         }
       );
   }
+
   fetchAccountBalance(accountId: number): void {
     this.accountService.getBalance(accountId).subscribe(
       (balance) => {
@@ -69,13 +72,14 @@ export class ClientComponent {
     if (this.valorDeposito > 0 && this.selectedAccountId > 0) {
       this.accountService.depositToAccount(this.selectedAccountId, this.valorDeposito)
         .subscribe(() => {
-          console.log('Depósito realizado com sucesso!');
+          this.showMessage('Depósito realizado com sucesso!', true);
           this.fetchClientById(this.selectedAccountId);
         }, error => {
+          this.showMessage('Erro ao processar depósito.', false);
           console.error('Erro ao processar depósito:', error);
         });
     } else {
-      console.error('Valor do depósito ou ID da conta inválido.');
+      this.showMessage('Valor do depósito ou ID da conta inválido.', false);
     }
   }
 
@@ -83,15 +87,16 @@ export class ClientComponent {
     if (this.valorDebito > 0 && this.selectedAccountId > 0) {
       this.accountService.debitToAccount(this.selectedAccountId, this.valorDebito).subscribe(
         () => {
-          console.log('Débito realizado com sucesso!');
+          this.showMessage('Débito realizado com sucesso!', true);
           this.fetchClientById(this.selectedAccountId);
         },
         (error) => {
+          this.showMessage('Erro ao processar débito.', false);
           console.error('Erro ao processar débito:', error);
         }
       );
     } else {
-      console.error('Valor do débito ou ID da conta inválido.');
+      this.showMessage('Valor do débito ou ID da conta inválido.', false);
     }
   }
 
@@ -99,14 +104,36 @@ export class ClientComponent {
     this.accountService.getTransactionHistory(accountId)
       .subscribe(
         transactions => {
-          this.transactionHistory = transactions;
+          this.transactionHistory = transactions.map(transaction => ({
+            ...transaction,
+            formattedDateTime: new Date(transaction.dateTime).toLocaleString('pt-BR', {
+              day: '2-digit',
+              month: '2-digit',
+              year: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+              second: '2-digit'
+            })
+          }));
         },
         error => {
           console.error('Erro ao recuperar histórico de transações:', error);
         }
       );
   }
+
+  showMessage(message: string, success: boolean): void {
+    this.message = message;
+    this.success = success;
+    setTimeout(() => {
+      this.message = '';
+    }, 3000);
+  }
+
   redirectToCreateAccount() {
     this.router.navigate(['/create-account']);
+  }
+  redirectToHome(){
+    this.router.navigate([''])
   }
 }

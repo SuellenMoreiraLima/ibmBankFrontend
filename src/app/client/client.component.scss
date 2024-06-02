@@ -158,3 +158,51 @@
 .transaction-table tbody tr.negative {
   color: #dc3545;
 }
+.mat-mdc-text-field-wrapper.mdc-text-field--filled {
+  background-color: #ffffff !important;
+}
+.success-message, .error-message {
+  color: white;
+  background-color: green;
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: inline-block;
+  margin-top: 10px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error-message {
+  background-color: red;
+}
+
+.client-details {
+  background-color: #f7f7f7;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.client-info {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-column-gap: 20px;
+  grid-row-gap: 15px;
+}
+
+.info-row {
+  display: flex;
+  align-items: center;
+  padding-right: 15px;
+}
+
+.info-label {
+  font-weight: bold;
+  padding: 5px;
+}
+
+.info-value {
+  font-weight: normal;
+  flex-grow: 1;
+}

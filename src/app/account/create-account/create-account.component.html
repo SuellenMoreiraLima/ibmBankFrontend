@@ -6,6 +6,7 @@
     <title>Bank App</title>
     <style>
         body {
+
             margin: 0;
             padding: 0;
             font-family: Arial, sans-serif;
@@ -82,18 +83,19 @@
             font-size: 16px;
         }
 
+
     </style>
 </head>
 <body>
   <div class="header">
 
     <div class="toolbar white">
-        <div class="img logo">
+        <div class="img logo" (click)="redirectToHome()">
             <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
         </div>
-        <div class="buttons">
-            <button mat-flat-button color="primary">Cadastre um nova conta</button>
-        </div>
+        <div class="button">
+          <button (click)="redirectToClients()" mat-flat-button color="primary">Acesse os clientes</button>
+      </div>
     </div>
 
     <div class="toolbar blue"></div>
@@ -105,54 +107,46 @@
       <h2>Complete os campos ao lado para pedir sua Conta e Cartão de crédito</h2>
     </div>
     <div class="image-container">
-      <img src="../../../assets/img-phone-card.png" alt="Exemplo de Imagem">
+      <img src="../../../assets/img-phone-card.png">
     </div>
   </div>
   <div class="form-container">
     <form [formGroup]="accountForm" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="fill" class="form-field">
+
+
+      <div appearance="fill" class="form-field">
         <mat-label class="label-nome">Nome</mat-label>
         <input matInput placeholder="Nome" formControlName="name" class="input-nome" required>
         <mat-error *ngIf="formControls['name'].invalid && formControls['name'].touched">Nome é obrigatório.</mat-error>
-      </mat-form-field>
+      </div>
 
 
-      <mat-form-field appearance="fill" class="form-field">
-        <mat-label class="label-nome">Idade</mat-label>
+      <div appearance="fill" class="form-field">
+        <label class="label-nome">Idade</label>
         <input matInput placeholder="Idade" type="number" formControlName="age" class="input-nome">
         <mat-error *ngIf="formControls['age'].invalid && formControls['age'].touched">
           <ng-container *ngIf="formControls['age'].errors?.['required']">Idade é obrigatória.</ng-container>
           <ng-container *ngIf="formControls['age'].errors?.['min']">A idade deve ser maior que zero.</ng-container>
           <ng-container *ngIf="formControls['age'].errors?.['max']">A idade deve ter no máximo dois dígitos.</ng-container>
         </mat-error>
-      </mat-form-field>
+      </div>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <div appearance="fill" class="form-field">
         <mat-label class="label-nome">Número da Conta</mat-label>
         <input matInput placeholder="Número da Conta" type="number" formControlName="numberAccount" class="input-nome">
         <mat-error *ngIf="formControls['numberAccount'].invalid && formControls['numberAccount'].touched">Número da Conta é obrigatório.</mat-error>
         <ng-container *ngIf="formControls['numberAccount'].errors?.['min']">O numero da conta deve ter 6 dígitos.</ng-container>
         <ng-container *ngIf="formControls['numberAccount'].errors?.['max']">O numero da conta deve ter 6 dígitos.</ng-container>
-      </mat-form-field>
+      </div>
 
-      <mat-form-field appearance="fill" class="form-field">
+      <div appearance="fill" class="form-field">
         <mat-label class="label-nome">Email</mat-label>
         <input matInput placeholder="Email" formControlName="email" class="input-nome">
         <mat-error *ngIf="formControls['email'].invalid && formControls['email'].touched">
           <ng-container *ngIf="formControls['email'].errors?.['required']">Email é obrigatório.</ng-container>
           <ng-container *ngIf="formControls['email'].errors?.['email']">Formato de email inválido.</ng-container>
         </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="fill" class="form-field">
-        <mat-label class="label-nome">Senha</mat-label>
-        <input matInput placeholder="Senha" type="password" formControlName="password" class="input-nome">
-        <mat-error *ngIf="formControls['password'].invalid && formControls['password'].touched">
-          <ng-container *ngIf="formControls['password'].errors?.['required']">Senha é obrigatória.</ng-container>
-          <ng-container *ngIf="formControls['password'].errors?.['minlength']">A senha deve ter no mínimo 6 caracteres.</ng-container>
-        </mat-error>
-      </mat-form-field>
-
+      </div>
       <div class="checkbox-container">
         <label class="checkbox-label">
           <input type="checkbox" class="checkbox-input" formControlName="terms">

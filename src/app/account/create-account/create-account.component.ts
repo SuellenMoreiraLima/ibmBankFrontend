@@ -1,7 +1,9 @@
+import { HomeComponent } from './../../home/home.component';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AccountService } from './../shared/account.service';
+import { FloatLabelType } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-create-account',
@@ -10,6 +12,12 @@ import { AccountService } from './../shared/account.service';
 })
 export class CreateAccountComponent implements OnInit {
   accountForm: FormGroup;
+  hideRequiredControl = new FormControl(false);
+  floatLabelControl = new FormControl('auto' as FloatLabelType);
+  options = this.fb.group({
+    hideRequired: this.hideRequiredControl,
+    floatLabel: this.floatLabelControl,
+  });
 
   constructor(
     private fb: FormBuilder,
@@ -21,7 +29,6 @@ export class CreateAccountComponent implements OnInit {
       age: ['', [Validators.required, Validators.min(1), Validators.max(99)]],
       numberAccount: ['', Validators.required, Validators.min(5), Validators.max(6)],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
       terms: [false, Validators.requiredTrue]
     });
   }
@@ -32,6 +39,9 @@ export class CreateAccountComponent implements OnInit {
     return this.accountForm.controls;
   }
 
+  getFloatLabelValue(): FloatLabelType {
+    return this.floatLabelControl.value || 'auto';
+  }
 
   onSubmit() {
     if (this.accountForm.invalid) {
@@ -52,5 +62,12 @@ export class CreateAccountComponent implements OnInit {
           console.error('Erro ao salvar dados do cliente:', error);
         }
       );
+  }
+
+  redirectToClients(){
+    this.router.navigate(['/client']);
+  }
+  redirectToHome(){
+    this.router.navigate([''])
   }
 }
