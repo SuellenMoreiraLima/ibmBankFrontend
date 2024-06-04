@@ -1,27 +1,69 @@
-# IbmBankFrontend
+# Banco IBM: 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.3.
+## Sumário
+1. [Introdução](#introdução)
+2. [Pré-requisitos](#pré-requisitos)
+3. [Subindo o Backend](#subindo-o-backend)
+4. [Subindo o Frontend](#subindo-o-frontend)
 
-## Development server
+## Introdução
+Este documento fornece um passo a passo detalhado para configurar e executar o backend e frontend do projeto.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Pré-requisitos
+Antes de começar, certifique-se de ter as seguintes ferramentas instaladas:
+- Java JDK
+- Maven
+- Node.js e npm
+- Angular CLI
 
-## Code scaffolding
+## Subindo o Backend
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Passo 1: Clone o Repositório
+- Clone o repositório do projeto:
+  
+  git clone https://github.com/SuellenMoreiraLima/bankIBM.git
+- Entre no diretório da aplicação:
+ cd bankIBM
 
-## Build
+### Passo 2: Build e Execute a Aplicação
+No diretório do projeto, execute:
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+./mvnw clean install  
+./mvnw spring-boot:run
 
-## Running unit tests
+### Passo 3: Acesse a Aplicação
+A aplicação Spring Boot estará disponível em http://localhost:8080 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Observação: Banco de Dados
+A aplicação usa o banco de dados H2, que é um banco de dados em memória configurado no application.properties. Para visualizar o banco de dados, acesse:
 
-## Running end-to-end tests
+http://localhost:8080/h2-console
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+JDBC URL: jdbc:h2:mem:testdb  
+Username: teste  
+Password: teste  
 
-## Further help
+## Subindo o Frontend
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Passo 1: Clone o Repositório
+Clone o repositório do projeto:
+
+git clone https://github.com/SuellenMoreiraLima/ibmBankFrontend.git  
+cd ibmBankFrontend  
+
+### Passo 2: Instale as Dependências
+No diretório do projeto, execute:
+
+npm install
+
+### Passo 3: Execute a Aplicação
+No diretório do projeto, execute:
+
+ng serve
+
+#### Passo 4: Acesse a Aplicação
+
+O frontend Angular estará disponível em http://localhost:4200.
+
+### Para dúvidas ou problemas, entre em contato com Suellen Lima.
+### developer.suellen.lima@gmail.com
