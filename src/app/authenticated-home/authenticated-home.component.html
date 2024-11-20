@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .toolbar {
+            color: #2c5085;
+            padding: 10px 20px;
+            height: 35px;
+        }
+
+        .blue{
+          background-color: #2c5085;
+        }
+
+        .white{
+          background-color: #ffffff;
+        }
+
+        .content {
+            padding: 20px;
+        }
+        .logo {
+            width: 94px; /* Defina a largura desejada da imagem */
+            height: auto; /* Mantenha a proporção da imagem */
+            max-width: 100%; /* Garanta que a imagem não ultrapasse o tamanho do contêiner */
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Ferramentas -->
+    <div class="toolbar white">
+      <div class="img logo">
+      <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
+    </div>
+   <!-- <button mat-fab extended >
+      <mat-icon>home</mat-icon>
+      Home
+    </button>-->
+    <router-outlet></router-outlet>
+
+    <button mat-flat-button color="primary">Cadastre-se</button>
+    </div>
+    <div class="toolbar blue"></div>
+
+    <!-- Conteúdo da Página -->
+    <div class="content">
+        <!-- Aqui você pode adicionar os componentes da sua aplicação Angular -->
+        <h1>Bem-vindo ao Banco IBM</h1>
+        <p>Esta é uma página de demonstração para o seu aplicativo de banco.</p>
+    </div>
+</body>
+</html>

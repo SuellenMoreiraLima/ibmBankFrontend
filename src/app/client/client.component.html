@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank App</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow-x: hidden;
+        }
+
+        .toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #ffffff;
+            padding: 10px 20px;
+            height: 35px;
+        }
+
+        .blue {
+            background-color: #2c5085;
+        }
+
+        .white {
+            background-color: #ffffff;
+        }
+
+        .logo {
+            width: 94px;
+            height: auto;
+            max-width: 100%;
+        }
+
+        button {
+            background-color: #2c5085 !important;
+            border-radius: 15px;
+            margin-left: auto;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .buttons button {
+            margin-left: 10px;
+        }
+
+        .footer {
+            bottom: 0;
+            width: 100%;
+            background-color: #2c5085;
+            padding: 10px 20px;
+            height: 30px;
+        }
+
+        .sidebar {
+            width: 200px;
+            position: fixed;
+            top: 110px;
+            left: 0;
+            height: 80vh;
+            background-color: #3d434b;
+            color: white;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .sidebar ul li a:hover,
+        .sidebar ul li.active a {
+            background-color: #1b355b;
+            border-radius: 5px;
+        }
+
+        .content-right {
+            margin-left: 220px;
+            padding: 20px;
+            margin-top: 15px;
+            margin-bottom: 50px;
+            margin-right: 20px;
+            z-index: 1;
+        }
+
+        .initial-content {
+            background-image: url('../../assets/background-client.jpeg');
+            background-size: cover;
+            opacity: 0.5;
+            background-position: center;
+            height: 71vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-align: center;
+        }
+
+        .initial-content select {
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+
+        .transaction-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .transaction-table th,
+        .transaction-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        .transaction-table th {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .balance-container {
+            text-align: right;
+            margin-bottom: 20px;
+        }
+
+        .positive {
+            color: green;
+        }
+
+        .negative {
+            color: red;
+        }
+
+        .client-option {
+            background-color: #000000;
+            margin: 5px;
+            padding: 10px;
+        }
+
+        .form-container {
+            background-color: #f7f7f7;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container h2 {
+            margin-top: 0;
+        }
+
+        .form-container label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2c5085;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .form-container button:hover {
+            background-color: #1a355b;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <!-- Barra de Ferramentas -->
+        <div class="toolbar white">
+            <div class="img logo" (click)="redirectToHome()">
+                <img src="../assets/download-removebg-preview.png" alt="Logo do Banco" class="logo">
+            </div>
+            <div class="buttons">
+                <button (click)="redirectToCreateAccount()" mat-flat-button color="primary">Cadastre uma nova conta</button>
+            </div>
+        </div>
+
+        <div class="toolbar blue"></div>
+    </div>
+    <div class="content">
+        <div class="sidebar">
+            <ul>
+                <li [ngClass]="{'active': selectedOption === 'initial'}"><a href="javascript:void(0);" (click)="changeContent('initial')">Menu inicial</a></li>
+                <li [ngClass]="{'active': selectedOption === 'dados'}"><a href="javascript:void(0);" (click)="changeContent('dados')">Dados Cliente</a></li>
+                <li [ngClass]="{'active': selectedOption === 'debito'}"><a href="javascript:void(0);" (click)="changeContent('debito')">Débito Cliente</a></li>
+                <li [ngClass]="{'active': selectedOption === 'credito'}"><a href="javascript:void(0);" (click)="changeContent('credito')">Deposito Cliente</a></li>
+                <li [ngClass]="{'active': selectedOption === 'extrato'}"><a href="javascript:void(0);" (click)="changeContent('extrato')">Extrato da Conta</a></li>
+            </ul>
+        </div>
+
+        <div class="content-right">
+          <div *ngIf="message" [ngClass]="{ 'success-message': success, 'error-message': !success }">
+            {{ message }}
+        </div>
+            <div *ngIf="selectedOption === 'initial'" class="initial-content">
+                <div class="client-option">
+                    <h1>Bem-vindo ao Bank App</h1>
+                    <p>Escolha um cliente para ver os dados ou realizar uma operação de crédito ou débito.</p>
+                    <select [(ngModel)]="selectedAccountId" (change)="fetchClientById(selectedAccountId)">
+                        <option value="" disabled selected>Selecione um cliente</option>
+                        <option *ngFor="let client of clients" [value]="client.id">{{ client.name }}</option>
+                    </select>
+                </div>
+            </div>
+            <div *ngIf="selectedOption === 'dados'">
+              <div class="client-details">
+                <h2>Dados do Cliente</h2>
+                <div class="client-info">
+                  <div class="info-row">
+                    <span class="info-label">Nome:</span>
+                    <span class="info-value">{{ account.name }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Idade:</span>
+                    <span class="info-value">{{ account.age }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Número da Conta:</span>
+                    <span class="info-value">{{ account.numberAccount }}</span>
+                  </div>
+                  <div class="info-row">
+                    <span class="info-label">Email:</span>
+                    <span class="info-value">{{ account.email }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div *ngIf="selectedOption === 'debito'" class="form-container">
+                <h2>Débito Cliente</h2>
+                <form (submit)="submitDebit()">
+                    <label for="valorDebito">Valor do Débito:</label>
+                    <input matInput [(ngModel)]="valorDebito" type="number" id="valorDebito" name="valorDebito">
+                    <button mat-flat-button color="primary" type="submit">Debitar</button>
+                </form>
+                <span *ngIf="message" [ngClass]="{'success-message': success, 'error-message': !success}">{{ message }}</span>
+            </div>
+            <div *ngIf="selectedOption === 'credito'" class="form-container">
+                <h2>Crédito Cliente</h2>
+                <form (submit)="submitDeposit()">
+                    <label for="valorDeposito">Valor do Depósito:</label>
+                    <input type="number" id="valorDeposito" name="valorDeposito" [(ngModel)]="valorDeposito">
+                    <button mat-flat-button color="primary" type="submit">Depositar</button>
+                </form>
+                <span *ngIf="message" [ngClass]="{'success-message': success, 'error-message': !success}">{{ message }}</span>
+            </div>
+            <div *ngIf="selectedOption === 'extrato'">
+              <div class="balance-container">
+                <h2>Saldo Atual: {{ saldoAtual | currency }}</h2>
+              </div>
+              <table class="transaction-table">
+                <thead>
+                  <tr>
+                    <th>Descrição</th>
+                    <th>Valor</th>
+                    <th>Data e Hora</th> <!-- Adiciona a nova coluna para Data e Hora -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let transaction of transactionHistory">
+                    <td>{{ transaction.description }}</td>
+                    <td [ngClass]="{'positive': transaction.value > 0, 'negative': transaction.value < 0}">
+                      {{ transaction.value | currency }}
+                    </td>
+                    <td>{{ transaction.formattedDateTime }}</td> <!-- Exibe a data e hora formatadas -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+        </div>
+    </div>
+    <div class="footer"></div>
+</body>
+
+</html>
