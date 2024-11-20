@@ -28,7 +28,7 @@ import { MatInputModule } from '@angular/material/input';
     ClientComponent,
   ],
   imports: [
-    BrowserModule,
+  BrowserModule,
     CommonModule,
     MatIconModule,
     BrowserAnimationsModule,
@@ -41,7 +41,7 @@ import { MatInputModule } from '@angular/material/input';
     MatGridListModule,
     MatListModule,
     ReactiveFormsModule,
-    MatInputModule
+    MatInputModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

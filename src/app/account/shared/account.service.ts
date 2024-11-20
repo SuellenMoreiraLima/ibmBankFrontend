@@ -16,16 +16,16 @@ export class AccountService {
   }
 
   depositToAccount(accountId: number, depositValue: number): Observable<any> {
-    const depositRequest = { valorDeposito: depositValue };
-    return this.http.post(`http://localhost:8080/account/deposit/${accountId}`, depositRequest);
+    return this.http.post(`http://localhost:8080/account/deposit/${accountId}`, depositValue);
   }
+
+
 
   debitToAccount(accountId: number, valorDebito: number): Observable<any> {
     const url = `http://localhost:8080/account/debit/${accountId}`;
-    console.log('URL:', url);
-    console.log('Payload:', { valorDebito });
-    return this.http.post<any>(url, { valorDebito });
+    return this.http.post(url, valorDebito);
   }
+
 
   createClient(clientData: any): Promise<any> {
     return this.saveClientData(clientData).toPromise();
